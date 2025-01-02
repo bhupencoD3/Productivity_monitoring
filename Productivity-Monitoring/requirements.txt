@@ -1,0 +1,7 @@
+retina-face
+opencv-python
+opencv-contrib-python
+numpy
+tf-keras
+# libgtk2.0-dev 
+# libgtk-3-dev

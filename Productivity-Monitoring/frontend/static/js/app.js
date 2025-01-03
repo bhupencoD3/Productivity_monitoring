@@ -15,4 +15,23 @@ function showModal() {
       hideModal();
     }
   }
-  
+   function validateLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorElement = document.getElementById('error');
+            errorElement.textContent = '';
+
+            const passwordRegex = /[@&]/;
+
+            if (!username) {
+                errorElement.textContent = 'Email is required.';
+                return;
+            }
+
+            if (!passwordRegex.test(password)) {
+                errorElement.textContent = 'Password must contain at least one @ or & character.';
+                return;
+            }
+
+            alert('Login successful!');
+        }

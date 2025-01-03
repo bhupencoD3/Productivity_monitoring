@@ -2,33 +2,30 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="static\css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-  <h2>Modal Login Form</h2>
-  <button onclick="showModal()" style="width:auto;">Login</button>
-  
-  <div id="id01" class="modal">
-    <form class="modal-content animate" action="/action_page.php" method="post">
-      <div class="imgcontainer">
-         <img src="img_avatar2.png" alt="Avatar" class="avatar">
-      </div>
-      <div class="container">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-        <button type="submit">Login</button>
-        <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label>
-      </div>
-      <div class="container" style="background-color:#f1f1f1">
-        <button type="button" onclick="hideModal()" class="cancelbtn">Cancel</button>
-        <span class="psw">Forgot <a href="#">password?</a></span>
-      </div>
-    </form>
-  </div>
-  <script src="app.js"></script>
+
+<!--      <div class="imgcontainer">-->
+<!--         <img src="/assets/compny.jpeg" alt="Image" class="image">-->
+
+     <div class="login-container">
+         <div class="imgcontainer">
+                    <img src="/assets/compny.jpeg" alt="Image" class="image">
+              </div>
+        <h1>Login</h1>
+        <form>
+            <input type="email" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+             <button onclick="showpage()">login</button>
+        </form>
+        <a href="#">Forgot your password?</a>
+    </div>
+   <script>
+        function showpage() {
+            window.location.href="test.html";
+        }
+    </script>
+  <script src="/js/app.js"></script>
 </body>
 </html>

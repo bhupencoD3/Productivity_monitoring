@@ -34,10 +34,6 @@ def process_frame(frame):
 def main():
     # Open a video capture (webcam)
     cap = cv2.VideoCapture(0)
-    
-
-    frame_count = 0
-    output_frame_limit = 10  # Number of frames to save before exiting
 
     while True:
         ret, frame = cap.read()
@@ -54,14 +50,7 @@ def main():
         except cv2.error:
             # Save frames to disk as a fallback
             print("GUI support is not available. Saving frames to disk.")
-            cv2.imwrite(f"output_frame_{frame_count}.jpg", processed_frame)
-
-        frame_count += 1
-
-        # Break after capturing a specific number of frames
-        if frame_count >= output_frame_limit:
-            print(f"Saved {output_frame_limit} frames. Exiting...")
-            break
+            cv2.imwrite("output_frame.jpg", processed_frame)
 
         # Exit on pressing 'q'
         if cv2.waitKey(1) & 0xFF == ord('q'):

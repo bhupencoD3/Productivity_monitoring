@@ -5,3 +5,4 @@ numpy
 tf-keras
 # libgtk2.0-dev 
 # libgtk-3-dev
+facenet-pytorch

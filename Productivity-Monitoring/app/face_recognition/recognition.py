@@ -48,6 +48,7 @@ def register_face(image, facenet_model):
     return get_face_embedding(image, facenet_model)
 
 # Recognize a face
+# Recognize a face
 def recognize_face(image, facenet_model, known_embeddings, threshold=0.7):
     """
     Recognize a face by comparing with known embeddings.
@@ -68,8 +69,8 @@ def recognize_face(image, facenet_model, known_embeddings, threshold=0.7):
 
     # Check if the match is above the threshold
     if max_similarity >= threshold:
-        return best_match, max_similarity
-    return None, max_similarity
+        return best_match, float(max_similarity)  # Just use float(max_similarity)
+    return None, float(max_similarity)  # Use float(max_similarity)
 
 # Main function to demonstrate the workflow
 if __name__ == "__main__":
@@ -78,7 +79,7 @@ if __name__ == "__main__":
 
     # Example to add a face to the known database
     print("Registering a new face...")
-    img = cv2.imread("path_to_image.jpg")  # Replace with the path to your image
+    img = cv2.imread("Productivity-Monitoring/app/face_recognition/1.png")  # Replace with the path to your image
     person_id = "Person_1"
     embedding = register_face(img, facenet)
     if embedding is not None:
@@ -87,11 +88,33 @@ if __name__ == "__main__":
     else:
         print("No face detected for registration.")
 
-    # Example to recognize a face
-    print("Recognizing a face...")
-    test_img = cv2.imread("path_to_test_image.jpg")  # Replace with a test image path
-    match_id, similarity = recognize_face(test_img, facenet, known_embeddings)
-    if match_id:
-        print(f"Face recognized as {match_id} with similarity {similarity:.2f}")
-    else:
-        print("No matching face found.")
+    # Start capturing the video feed from the webcam
+    cap = cv2.VideoCapture(0)  # 0 for default webcam
+
+    while True:
+        # Read a frame from the webcam
+        ret, frame = cap.read()
+        if not ret:
+            print("Failed to grab frame")
+            break
+        
+        # Process the frame to detect and recognize the face
+        match_id, similarity = recognize_face(frame, facenet, known_embeddings)
+        
+        # Display the frame with recognition results
+        if match_id:
+            label = f"Face recognized as {match_id} with similarity {similarity:.2f}"
+            cv2.putText(frame, label, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+        else:
+            cv2.putText(frame, "No matching face found", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
+        
+        # Show the live webcam feed
+        cv2.imshow("Webcam - Face Recognition", frame)
+
+        # Break the loop if the user presses the 'q' key
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    # Release the webcam and close all OpenCV windows
+    cap.release()
+    cv2.destroyAllWindows()

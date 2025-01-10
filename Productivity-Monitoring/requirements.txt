@@ -6,3 +6,7 @@ tf-keras
 # libgtk2.0-dev 
 # libgtk-3-dev
 facenet-pytorch
+fastapi
+sqlalchemy
+databases
+jwt

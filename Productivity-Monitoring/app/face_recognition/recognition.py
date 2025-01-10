@@ -8,7 +8,7 @@ from PIL import Image
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 facenet = InceptionResnetV1(pretrained='vggface2').eval().to(device)
 
-# Load MTCNN for face detection
+# Load MTCNN for face detectionqqqqq
 mtcnn = MTCNN(keep_all=True, device=device)
 
 # Function to extract embeddings from a face
@@ -67,7 +67,7 @@ def recognize_face(image, facenet_model, known_embeddings, threshold=0.7):
             max_similarity = similarity
             best_match = person_id
 
-    # Check if the match is above the threshold
+    # Check if the match is above the thresholdq
     if max_similarity >= threshold:
         return best_match, float(max_similarity)  # Just use float(max_similarity)
     return None, float(max_similarity)  # Use float(max_similarity)
@@ -77,10 +77,10 @@ if __name__ == "__main__":
     # Initialize a dictionary to store known embeddings
     known_embeddings = {}
 
-    # Example to add a face to the known database
+    # Example to add a face to the known databaseqq
     print("Registering a new face...")
     img = cv2.imread("Productivity-Monitoring/app/face_recognition/1.png")  # Replace with the path to your image
-    person_id = "Person_1"
+    person_id = "Shubham"
     embedding = register_face(img, facenet)
     if embedding is not None:
         known_embeddings[person_id] = embedding
